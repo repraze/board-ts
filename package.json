@@ -7,17 +7,18 @@
         "lib/**/*"
     ],
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "mocha -r ts-node/register src/**/*.test.ts",
         "build": "tsc",
         "build-watch": "tsc -w",
         "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-        "lint": "tslint -p tsconfig.json",
-        "test": "mocha -r ts-node/register src/**/test.ts"
+        "lint": "tslint -p tsconfig.json"
     },
     "author": "",
     "license": "MIT",
     "dependencies": {},
     "devDependencies": {
+        "@types/chai": "^4.2.10",
+        "@types/mocha": "^7.0.2",
         "chai": "^4.2.0",
         "mocha": "^7.1.0",
         "prettier": "^1.19.1",
