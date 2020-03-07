@@ -1,4 +1,4 @@
-type Generator = () => number;
+export type Generator = () => number;
 
 export class Random {
     private generator: Generator;
@@ -23,9 +23,26 @@ export class Random {
     listItems<T>(list: T[], amount: number): T[] {
         throw new Error("not implemented");
     }
+    weightedListItem<T>(list: T[], weights: number[]): T {
+        const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
+        const weightSections: number[] = [];
+        let adjustedWeight = 0;
+        let previousWeight = 0;
+        weights.forEach(weight => {
+            adjustedWeight = weight / totalWeight + previousWeight;
+            weightSections.push(adjustedWeight);
+            previousWeight = adjustedWeight;
+        });
+        const selectedWeight = this.generator();
+        let selectedItem = 0;
+        while (weightSections[selectedItem] < selectedWeight) {
+            selectedItem++;
+        }
+        return list[selectedItem];
+    }
     // Fisher-Yates
     listShuffle<T>(list: T[]): T[] {
-        let shuffledList = [...list];
+        const shuffledList = [...list];
         let currentPosition = list.length - 1;
         let newPosition;
         let item;
