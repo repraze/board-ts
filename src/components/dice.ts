@@ -33,7 +33,7 @@ export default class Dice<Face> {
     get value(): Face {
         return this.state;
     }
-    roll() {
+    roll(): void {
         if (this.weights !== undefined) {
             this.state = this.random.weightedListItem<Face>(this.faces, this.weights);
         } else {
